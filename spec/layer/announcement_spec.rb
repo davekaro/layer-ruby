@@ -54,12 +54,12 @@ describe Layer::Announcement do
     end
 
     it 'should create the announcement' do
-      described_class.create(attributes, client)
-      expect(client).to have_received(:post).with('/announcements', attributes)
+      described_class.create(attributes, {}, client)
+      expect(client).to have_received(:post).with('/announcements', attributes, {})
     end
 
     it 'should return an instace' do
-      expect(described_class.create(attributes, client))
+      expect(described_class.create(attributes, {}, client))
         .to be_kind_of(described_class)
     end
   end

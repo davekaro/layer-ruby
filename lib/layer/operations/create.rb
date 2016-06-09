@@ -9,8 +9,8 @@ module Layer
         # @param client [Layer::Client] the client to use to make this request
         # @return [Layer::Resource] the created resource
         # @raise [Layer::Exceptions::Exception] a subclass of Layer::Exceptions::Exception describing the error
-        def create(attributes = {}, client = self.client)
-          response = client.post(url, attributes)
+        def create(attributes = {}, headers = {}, client = self.client)
+          response = client.post(url, attributes, headers)
           from_response(response, client)
         end
       end

@@ -50,12 +50,18 @@ describe Layer::Conversation do
     end
 
     it 'should create the conversation' do
-      described_class.create(attributes, client)
-      expect(client).to have_received(:post).with("/conversations", attributes)
+      described_class.create(attributes, {}, client)
+      expect(client).to have_received(:post).with("/conversations", attributes, {})
+    end
+
+    it 'should create the conversation with custom headers' do
+      headers = { 'If-None-Match' => SecureRandom.uuid }
+      described_class.create(attributes, headers, client)
+      expect(client).to have_received(:post).with("/conversations", attributes, headers)
     end
 
     it 'should return an instace' do
-      expect(described_class.create(attributes, client))
+      expect(described_class.create(attributes, {}, client))
         .to be_kind_of(described_class)
     end
   end
